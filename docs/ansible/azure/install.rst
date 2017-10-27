@@ -8,27 +8,9 @@ In this section, you will install the Azure CLI and configure it so that you can
 
 Install Azure
 -------------
-#. Install the Azure CLI using ``pip``::
+Make sure the Toil ``ansible`` extra is installed:::
 
-   (venv) $ pip install azure==2.0.0rc5
-   (venv) $ pip install azure-cli
-
-
-#. Verify that the version of the Azure CLI is 2.0 or higher::
-
-   (venv) $ az --version
-
-#. Install a Python DNS resolver using ``pip``::
-
-   (venv) $ pip install dnspython
-
-#. Install a REST client for Azure using ``pip``::
-
-   (venv) $ pip install msrestazure
-
-#. Install `packaging` using ``pip``::
-
-   (venv) $ pip install packaging
+   (venv) $ pip install toil[azure]
 
 Create an Azure service principal
 ---------------------------------
@@ -72,11 +54,11 @@ Create an Azure service principal
 
    e.g.::
 
-   (venv) $ az configure --defaults group=myresourcegroup  
+   (venv) $ az configure --defaults group=myresourcegroup
 
 #. Create an Azure service principal for the application::
 
-   (venv) $ az ad sp create --id <appId> 
+   (venv) $ az ad sp create --id <appId>
 
    e.g.::
 
@@ -109,7 +91,7 @@ Create an Azure service principal
      "state": "Enabled",
      "tenantId": "33333333-3333-3333-3333-333333333333",
      "user": { "name": "first.last@microsoft.com", "type": "user" }
-     } 
+     }
 
 
 #. Assign the Azure Contributor role to the service principal associated with the default resource group::
@@ -132,7 +114,7 @@ Create an Azure service principal
       },
       "resourceGroup": "myresourcegroup",
       "type": "Microsoft.Authorization/roleAssignments"
-      } 
+      }
 
 Create Azure network resources
 ------------------------------
@@ -148,7 +130,7 @@ Create Azure network resources
 #. Create a public IP address for your VM::
 
 
-   (venv) $ az network public-ip create --name <ip-name> 
+   (venv) $ az network public-ip create --name <ip-name>
 
 
    e.g.::
@@ -169,13 +151,13 @@ Create Azure network resources
       }
 
 
-Create a virtual machine in Azure 
+Create a virtual machine in Azure
 ---------------------------------
 
 #. Create a VM in Azure::
 
    (venv) $ az vm create -n mytestvm --image OpenLogic:CentOS:7.3:latest --vnet-name myVnet --subnet mySubnet --public-ip-address myIP --authentication-type password --admin-username test-user --admin-password Microsoft123!
-   
+
    Your expected output will be similar to the following::
 
       {
@@ -208,16 +190,16 @@ Create a virtual machine in Azure
 
    (venv) $ az vm delete --name mytestvm
 
-Create a credentials file for Azure 
+Create a credentials file for Azure
 -----------------------------------
-We will need to store our Azure credentials in some location where the Ansible scripts can read them.  There are multiple options for doing so as described here_. 
+We will need to store our Azure credentials in some location where the Ansible scripts can read them.  There are multiple options for doing so as described here_.
 
 .. _here: http://docs.ansible.com/ansible/latest/guide_azure.html#providing-credentials-to-azure-modules.o/docs/py2or3.html
- 
-#. Create a directory in your home directory called `.azure`:: 
 
-   (venv) $ mkdir ~/.azure 
-  
+#. Create a directory in your home directory called `.azure`::
+
+   (venv) $ mkdir ~/.azure
+
 #. Create a file called `~/.azure/credentials`::
 
       (venv) $ vi ~/.azure/credentials
