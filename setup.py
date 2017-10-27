@@ -43,7 +43,12 @@ def runSetup():
                 'cgcloud-lib==' + version.cgcloudVersion,
                 'futures==3.0.5'],
             'azure': [
-                'azure==1.0.3'],
+                'azure==2.0.0rc5',
+                'azure-cli==2.0.20',
+                'dnspython==1.15.0',
+                'msrestazure==0.4.15',
+                'packaging==16.8',
+                'pipettor==0.2.0'],
             'encryption': [
                 'pynacl==1.1.2'],
             'google': [
